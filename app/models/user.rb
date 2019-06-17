@@ -8,6 +8,7 @@ class User < ApplicationRecord
   
   has_many :microposts
   
+  
   has_many :relationships 
   # *1
   has_many :followings, through: :relationships, source: :follow
@@ -16,6 +17,11 @@ class User < ApplicationRecord
   # *2
   has_many :followers, through: :reverses_of_relationship, source: :user
   # *4
+  has_many :favorites
+  
+  has_many :favorite_posts, through: :favorites, source: :micropost
+  
+  
   
   #↓f/uf出来るようにするメソッド
   
