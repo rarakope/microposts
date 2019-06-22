@@ -44,6 +44,12 @@ class User < ApplicationRecord
     Micropost.where(user_id: self.following_ids + [self.id])
   end
   
+  #お気に入りを出来るようにするメソッド
+  
+  
+    
+  
+  
 end
 
 =begin 
