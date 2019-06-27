@@ -1,17 +1,17 @@
 <ul class="list-unstyled">
   <% favorites.each do |favorite| %>
     <li class="media mb-3">
-      <img class="mr-2 rounded" src="<%= gravatar_url(micropost.user, { size: 50 }) %>" alt="">
+      <img class="mr-2 rounded" src="<%= gravatar_url(favorite.user, { size: 50 }) %>" alt="">
       <div class="media-body">
         <div>
-          <%= link_to micropost.user.name, user_path(micropost.user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
+          <%= link_to favorite.user.name, user_path(favorite.user) %> <span class="text-muted">posted at <%= favorite.created_at %></span>
         </div>
         <div>
-          <p class="mb-0"><%= micropost.content %></p>
+          <p class="mb-0"><%= favorite.content %></p>
         </div>
         <div>
-          <% if current_user == micropost.user %>
-            <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+          <% if current_user == favorite.user %>
+            <%= link_to "Delete", favorite, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
           <% end %>
         </div>
       </div>

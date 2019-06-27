@@ -17,7 +17,7 @@ class User < ApplicationRecord
   # *2
   has_many :followers, through: :reverses_of_relationship, source: :user
   # *4
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   
   has_many :favorite_posts, through: :favorites, source: :micropost
   
@@ -46,10 +46,20 @@ class User < ApplicationRecord
   
   #お気に入りを出来るようにするメソッド
   
+  def favorite(other_post)
+    unless self == other_post
+      self.favorites.find_or_create_by(micropost_id: other_post.id)
+    end
+  end
   
-    
+  def unfavorite(other_post)
+    favorite = self.favorites.find_by(micropost_id: other_post.id)
+    favorite.destroy if favorite
+  end
   
-  
+  def favorite?(other_post)
+    self.favorite_posts.include?(other_post)
+  end
 end
 
 =begin 
